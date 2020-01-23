@@ -14,24 +14,24 @@ enum ImageError: Error {
 }
 
 protocol ServiceImage {
-    associatedtype Image: UIImage
-    
-    func getImage(completion: @escaping (Swift.Result<Image, ImageError>) -> ())
+    func getImage(completion: @escaping (Swift.Result<UIImage, ImageError>) -> ())
 }
 
-enum TypeImage: String {
+fileprivate enum TypeImage: String {
     case smile = "https://png.pngtree.com/png-clipart/20190516/original/pngtree-lol-emoji-vector-icon-png-image_3719384.jpg"
     case sad = "https://images-na.ssl-images-amazon.com/images/I/312Gml3UM0L.jpg"
     case normal = "https://images.assetsdelivery.com/compings_v2/terrry4/terrry41904/terrry4190401586.jpg"
 }
 
-struct ImageDownloader: ServiceImage {
+class ImageDownloaderBase: ServiceImage {
     
-    let filter: CIFilter
+    let filterApplicator: FilterApplicator
     let url: URL
     
-    init(filter: CIFilter, type: TypeImage) {
-        self.filter = filter
+    fileprivate init(filterApplicator: FilterApplicator, type: TypeImage) {
+        // Dependency injection (DI)
+        self.filterApplicator = filterApplicator
+
         self.url = URL(string: type.rawValue)!
     }
     
@@ -47,16 +47,30 @@ struct ImageDownloader: ServiceImage {
                 completion(.failure(.emptyData))
                 return
             }
-            let context = CIContext(options: nil)
-            self.filter.setValue(CIImage(data: data), forKey: kCIInputImageKey)
-            if let output = self.filter.outputImage, let cgImage = context.createCGImage(output, from: output.extent) {
-                completion(.success(UIImage(cgImage: cgImage)))
+            guard let image = UIImage(data: data), let output = self.filterApplicator.applyFilter(image: image) else {
+                completion(.failure(.notApplyFilter))
                 return
             }
-            completion(.failure(.notApplyFilter))
+            completion(.success(output))
             return
         }
     }
 }
 
+class SmileImageDownloader: ImageDownloaderBase {
+    init(filterApplicator: FilterApplicator) {
+        super.init(filterApplicator: filterApplicator, type: TypeImage.smile)
+    }
+}
 
+class SadImageDownloader: ImageDownloaderBase {
+    init(filterApplicator: FilterApplicator) {
+        super.init(filterApplicator: filterApplicator, type: TypeImage.sad)
+    }
+}
+
+class NormalImageDownloader: ImageDownloaderBase {
+    init(filterApplicator: FilterApplicator) {
+        super.init(filterApplicator: filterApplicator, type: TypeImage.normal)
+    }
+}
