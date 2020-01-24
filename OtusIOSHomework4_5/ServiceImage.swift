@@ -8,13 +8,10 @@
 
 import UIKit
 import Alamofire
-
-enum ImageError: Error {
-    case badURL, emptyData, notApplyFilter
-}
+import Combine
 
 protocol ServiceImage {
-    func getImage(completion: @escaping (Swift.Result<UIImage, ImageError>) -> ())
+    func getImage() -> Future<UIImage?, Never>
 }
 
 fileprivate enum TypeImage: String {
@@ -35,24 +32,33 @@ class ImageDownloaderBase: ServiceImage {
         self.url = URL(string: type.rawValue)!
     }
     
-    func getImage(completion: @escaping (Swift.Result<UIImage, ImageError>) -> ()) {
-        Alamofire.request(url).responseData { response in
-            guard response.error == nil else {
-                print(response.error!)
-                completion(.failure(.badURL))
+    func getImage() -> Future<UIImage?, Never> {
+        return Future { [url] promise in
+            Alamofire.request(url).responseData { response in
+                guard response.error == nil else {
+                    print("\(response.error!) for \(url)")
+                    promise(.success(nil))
+                    return
+                }
+                guard let data = response.data else {
+                    print("Empty data for \(url)")
+                    promise(.success(nil))
+                    return
+                }
+                guard let image = UIImage(data: data) else {
+                    print("Bad data for \(url)")
+                    promise(.success(nil))
+                    return
+                }
+                guard let output = self.filterApplicator.applyFilter(image: image) else {
+                    print("Can't apply filter for \(url)")
+                    promise(.success(nil))
+                    return
+                }
+                print("It's OK for \(url)")
+                promise(.success(output))
                 return
             }
-            guard let data = response.data else {
-                print("Empty data")
-                completion(.failure(.emptyData))
-                return
-            }
-            guard let image = UIImage(data: data), let output = self.filterApplicator.applyFilter(image: image) else {
-                completion(.failure(.notApplyFilter))
-                return
-            }
-            completion(.success(output))
-            return
         }
     }
 }

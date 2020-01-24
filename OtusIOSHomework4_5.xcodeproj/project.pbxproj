@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		CE2E5B4823D9805F0007D981 /* FilterApplicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E5B4723D9805F0007D981 /* FilterApplicator.swift */; };
 		CE2E5B4A23D9B7690007D981 /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E5B4923D9B7690007D981 /* ServiceLocator.swift */; };
-		CE2E5B4C23D9D3950007D981 /* CombineImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E5B4B23D9D3950007D981 /* CombineImage.swift */; };
+		CE44F1A323DB2A1F0086ADAC /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE44F1A223DB2A1F0086ADAC /* ContentViewModel.swift */; };
 		E9A9877B23D7AAED009B8E82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A9877A23D7AAED009B8E82 /* AppDelegate.swift */; };
 		E9A9877D23D7AAED009B8E82 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A9877C23D7AAED009B8E82 /* SceneDelegate.swift */; };
 		E9A9877F23D7AAED009B8E82 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A9877E23D7AAED009B8E82 /* ContentView.swift */; };
@@ -23,7 +23,7 @@
 /* Begin PBXFileReference section */
 		CE2E5B4723D9805F0007D981 /* FilterApplicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterApplicator.swift; sourceTree = "<group>"; };
 		CE2E5B4923D9B7690007D981 /* ServiceLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
-		CE2E5B4B23D9D3950007D981 /* CombineImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineImage.swift; sourceTree = "<group>"; };
+		CE44F1A223DB2A1F0086ADAC /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		E9A9877723D7AAED009B8E82 /* OtusIOSHomework4_5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OtusIOSHomework4_5.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9A9877A23D7AAED009B8E82 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E9A9877C23D7AAED009B8E82 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,9 +70,9 @@
 				E9A9877C23D7AAED009B8E82 /* SceneDelegate.swift */,
 				E9D3838C23D7BA5700DE7396 /* ServiceImage.swift */,
 				CE2E5B4723D9805F0007D981 /* FilterApplicator.swift */,
-				CE2E5B4B23D9D3950007D981 /* CombineImage.swift */,
 				CE2E5B4923D9B7690007D981 /* ServiceLocator.swift */,
 				E9A9877E23D7AAED009B8E82 /* ContentView.swift */,
+				CE44F1A223DB2A1F0086ADAC /* ContentViewModel.swift */,
 				E9A9878023D7AAF0009B8E82 /* Assets.xcassets */,
 				E9A9878523D7AAF0009B8E82 /* LaunchScreen.storyboard */,
 				E9A9878823D7AAF0009B8E82 /* Info.plist */,
@@ -167,10 +167,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE2E5B4A23D9B7690007D981 /* ServiceLocator.swift in Sources */,
+				CE44F1A323DB2A1F0086ADAC /* ContentViewModel.swift in Sources */,
 				E9A9877B23D7AAED009B8E82 /* AppDelegate.swift in Sources */,
 				E9D3838D23D7BA5700DE7396 /* ServiceImage.swift in Sources */,
 				CE2E5B4823D9805F0007D981 /* FilterApplicator.swift in Sources */,
-				CE2E5B4C23D9D3950007D981 /* CombineImage.swift in Sources */,
 				E9A9877D23D7AAED009B8E82 /* SceneDelegate.swift in Sources */,
 				E9A9877F23D7AAED009B8E82 /* ContentView.swift in Sources */,
 			);
